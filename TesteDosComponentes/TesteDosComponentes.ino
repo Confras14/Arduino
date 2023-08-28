@@ -11,11 +11,16 @@ void ledRGB(int R, int G, int B) {
   analogWrite(ledB, B);
 }
 
-void buzzerAptMl() {
+void buzzerAptMlAtv() {
   digitalWrite(buzzer, 0);
   delay(250);
   digitalWrite(buzzer, 1);
   delay(250);
+}
+
+void buzzerAptMlPass() {
+  tone(buzzer, 500, 250);
+  delay(500);
 }
 
 void setup() {
@@ -52,15 +57,28 @@ void loop() {
   else if (valApp == 'G') {ledRGB(0, 255, 0);}
 
   else if (valApp == 'B') {ledRGB(0, 0, 255);}
+//
+//  else if (valApp == 'Z') {digitalWrite(buzzer, 0);}
+//  else if (valApp == 'z') {digitalWrite(buzzer, 1);}
 
-  else if (valApp == 'Z') {digitalWrite(buzzer, 0);}
+//  else if (valApp == 'X') {
+//    int i = 1;
+//    while(i != 0) {
+//      buzzerAptMlAtv();
+//      valApp = Serial.read();
+//      Serial.println(valApp);
+//      if(valApp == 'x'){ i = 0; }
+//    }
+//  }
 
-  else if (valApp == 'z') {digitalWrite(buzzer, 1);}
+
+  if (valApp == 'Z') {tone(buzzer, 500, );}
+  if (valApp == 'z') {tone(buzzer, 0, 0);}
 
   else if (valApp == 'X') {
     int i = 1;
     while(i != 0) {
-      buzzerAptMl();
+      buzzerAptMlPass();
       valApp = Serial.read();
       Serial.println(valApp);
       if(valApp == 'x'){ i = 0; }
