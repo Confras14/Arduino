@@ -51,6 +51,8 @@ void loop() {
     B = Azul
     Z = buzzer ON
     z = Buzzer OFF
+    X = buzzer apita ON
+    x = buzzer apita OFF
   */
 
   valApp = Serial.read();
@@ -70,13 +72,15 @@ void loop() {
 
   else if (valApp == 'z') {digitalWrite(buzzer, 1);}
 
-  if (valApp == 'X') {
+  else if (valApp == 'X') {
     int i = 1;
     while(i != 0) {
       buzzerAptMl();
-      if(valApp == 'x'){ i = 0 }
+      valApp = Serial.read();
+      Serial.println(valApp);
+      if(valApp == 'x'){ i = 0; }
     }
   }
-
+ 
   delay(100);
 }
