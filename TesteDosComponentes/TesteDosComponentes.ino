@@ -11,23 +11,11 @@ void ledRGB(int R, int G, int B) {
   analogWrite(ledB, B);
 }
 
-/* PARTE 2
-void buzzerAptUn(int t) {
-  digitalWrite(buzzer, 0);
-  delay(t);
-  digitalWrite(buzzer, 1);
-}
-*/
-
 void buzzerAptMl() {
   digitalWrite(buzzer, 0);
   delay(250);
   digitalWrite(buzzer, 1);
   delay(250);
-}
-
-void buzzerOn_Off() {
-  digitalWrite(buzzer, !(digitalRead(buzzer)));
 }
 
 void setup() {
@@ -37,7 +25,6 @@ void setup() {
   pinMode(buzzer, OUTPUT);
 
   Serial.begin(9600);
-
   digitalWrite(buzzer, 1);
 }
 
@@ -51,8 +38,6 @@ void loop() {
     B = Azul
     Z = buzzer ON
     z = Buzzer OFF
-    X = buzzer apita ON
-    x = buzzer apita OFF
   */
 
   valApp = Serial.read();
