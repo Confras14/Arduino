@@ -2,6 +2,8 @@
 #define buzzerPassA 5
 
 int qualBuzzer = 0;
+int cntLigF = 0;
+int cntLigP = 0;
 char valApp = 0;
 
 //Função para Ligar o led rgb
@@ -26,14 +28,21 @@ void setup() {
 
 void loop() {
   /*
-    on buzzer = 'O'
-    on buzzer = 'o'
     buzzer alto = 'A'
     buzzer baixo = 'a'
+
+    Foco on = 'O'
+    Foco off = 'o'
+
+    Pomodoro = 'P'
+    Pausa Curta = 'C'
+    Pausa Longa = 'L'
   */
 
-  valApp = Serial.read();
-  Serial.println(valApp);
+  if(ctnLig != 1) {
+    valApp = Serial.read();
+    Serial.println(valApp);
+  }
 
   if(valApp == 'A'){qualBuzzer = 1;
     Serial.println(qualBuzzer);}
@@ -41,31 +50,65 @@ void loop() {
     Serial.println(qualBuzzer);}
 
   if(valApp == 'O') {
-    if(qualBuzzer == 1){
+    if(qualBuzzer == 0 || qualBuzzer != 1 || qualBuzzer != 2) {
+      console.log("Escolha um buzzer antes!");
+    }
+    else if(qualBuzzer == 1){
       //Ligar buzzer baixo
       int lbb = 0;
       while(lbb != 1){
         buzzerPass(buzzerPassB);
-        if(valApp == 'o'){lbb = 1;}
-
-        if(digitalRead(buzzerPassA) == 1) {tone(buzzerPassA, 1, 1);}
         
         valApp = Serial.read();
         Serial.println(valApp);
+
+        if(valApp == 'a'){
+          qualBuzzer = 2;
+          Serial.println(qualBuzzer);
+        }
+
+        if(digitalRead(buzzerPassA) == 1) {tone(buzzerPassA, 1, 1);}
+        if(valApp == 'o') {lbb = 1;}
+        
+        if(qualBuzzer == 1) {
+          cntLigF = 1;
+          lbb = 1;
+        }
       }
-    }else if(qualBuzzer == 2){
+    }
+    else if(qualBuzzer == 2){
       //Ligar buzzer alto
       int lba = 0;
       while(lba != 1){
         buzzerPass(buzzerPassA);
-        if(valApp == 'o'){lba = 1;}
 
-        if(digitalRead(buzzerPassB) == 1) {tone(buzzerPassB, 1, 1);}
-        
         valApp = Serial.read();
         Serial.println(valApp);
+
+        if(valApp == 'A'){
+          qualBuzzer = 1;
+          Serial.println(qualBuzzer);
+        }
+
+        if(digitalRead(buzzerPassB) == 1) {tone(buzzerPassB, 1, 1);}
+        if(valApp == 'o') {lba = 1;}
+
+        if(qualBuzzer == 1) {
+          cntLigF = 1;
+          lba = 1;
+        }
       }
     }
+  }
+
+  else if(cntLigF != 1 && valApp == 'P'){
+    //Pomodoro
+  }
+  else if(cntLigF != 1 && valApp == 'C'){
+    //Pausa Curta
+  }
+  else if(cntLigF != 1 && valApp == 'L'){
+    //Pausa Longa
   }
   
   delay(100);
