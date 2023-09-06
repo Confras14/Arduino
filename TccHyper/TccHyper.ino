@@ -47,7 +47,7 @@ void loop() {
     Pausa Longa = 'L'
   */
 
-  if(ctnLig != 1) {
+  if(cntLigP != 1 || cntLigF != 1) {
     valApp = Serial.read();
     Serial.println(valApp);
   }
@@ -57,9 +57,9 @@ void loop() {
   if(valApp == 'a'){qualBuzzer = 2;
     Serial.println(qualBuzzer);}
 
-  if(valApp == 'O' || ctnLig == 1) {
+  if(valApp == 'O' || cntLigP != 1 || cntLigF != 1) {
     if(qualBuzzer == 0 || qualBuzzer != 1 || qualBuzzer != 2) {
-      console.log("Escolha um buzzer antes!");
+      Serial.println("Escolha um buzzer antes!");
     }
     else if(qualBuzzer == 1){
       //Ligar buzzer baixo
