@@ -57,7 +57,7 @@ void loop() {
   if(valApp == 'a'){qualBuzzer = 2;
     Serial.println(qualBuzzer);}
 
-  if(valApp == 'O') {
+  if(valApp == 'O' || ctnLig == 1) {
     if(qualBuzzer == 0 || qualBuzzer != 1 || qualBuzzer != 2) {
       console.log("Escolha um buzzer antes!");
     }
