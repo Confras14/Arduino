@@ -1,9 +1,13 @@
 #define buzzerPassB 6
 #define buzzerPassA 5
 
-#define ledR 11
-#define ledG 10
-#define ledB 9
+#define ledR1 11
+#define ledG1 10
+#define ledB1 9
+
+#define ledR2 6
+#define ledG2 5
+#define ledB2 3
 
 int qualBuzzer = 0;
 int cntLigF = 0;
@@ -47,7 +51,7 @@ void loop() {
     Pausa Longa = 'L'
   */
 
-  if(ctnLig != 1) {
+  if(cntLigF != 1) {
     valApp = Serial.read();
     Serial.println(valApp);
   }
@@ -57,9 +61,9 @@ void loop() {
   if(valApp == 'a'){qualBuzzer = 2;
     Serial.println(qualBuzzer);}
 
-  if(valApp == 'O' || ctnLig == 1) {
+  if(valApp == 'O' || cntLigF == 1) {
     if(qualBuzzer == 0 || qualBuzzer != 1 || qualBuzzer != 2) {
-      console.log("Escolha um buzzer antes!");
+      Serial.println("Escolha um buzzer antes!");
     }
     else if(qualBuzzer == 1){
       //Ligar buzzer baixo
@@ -84,7 +88,7 @@ void loop() {
         }
       }
     }
-    else if(qualBuzzer == 2){
+    else if(qualBuzzer == 2 || cntLigF == 1){
       //Ligar buzzer alto
       int lba = 0;
       while(lba != 1){
