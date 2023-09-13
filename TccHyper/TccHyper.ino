@@ -1,5 +1,5 @@
-#define buzzerPassB 6
-#define buzzerPassA 5
+#define buzzerPassB 7
+#define buzzerPassA 8
 
 #define ledR1 11
 #define ledG1 10
@@ -14,11 +14,18 @@ int cntLigF = 0;
 int cntLigP = 0;
 char valApp = 0;
 
-//Função para Ligar o led rgb
+//Função para Ligar o led rgb 1
 void ledRGB(int R, int G, int B) {
-  analogWrite(ledR, R);
-  analogWrite(ledG, G);
-  analogWrite(ledB, B);
+  analogWrite(ledR1, R);
+  analogWrite(ledG1, G);
+  analogWrite(ledB1, B);
+}
+
+//Função para Ligar o led rgb 2
+void ledRGB(int R, int G, int B) {
+  analogWrite(ledR2, R);
+  analogWrite(ledG2, G);
+  analogWrite(ledB2, B);
 }
 
 //Função para apitar o buzzer passivo
@@ -31,10 +38,13 @@ void setup() {
   pinMode(buzzerPassB, OUTPUT);
   pinMode(buzzerPassA, OUTPUT);
   
-  pinMode(ledR, OUTPUT);
-  pinMode(ledG, OUTPUT);
-  pinMode(ledB, OUTPUT);
-
+  pinMode(ledR1, OUTPUT);
+  pinMode(ledG1, OUTPUT);
+  pinMode(ledB1, OUTPUT);
+  pinMode(ledR2, OUTPUT);
+  pinMode(ledG2, OUTPUT);
+  pinMode(ledB2, OUTPUT);
+  
   Serial.begin(9600);
 }
 
