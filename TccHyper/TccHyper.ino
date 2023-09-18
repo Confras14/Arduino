@@ -33,7 +33,7 @@ void buzzerPass(int buzzer) {
   tone(buzzer, 500, 250);
   delay(750);
 }
-
+ww
 void setup() {
   pinMode(buzzerPassB, OUTPUT);
   pinMode(buzzerPassA, OUTPUT);
