@@ -1,0 +1,66 @@
+#define led1R 11
+#define led1G 10
+#define led1B 9
+
+#define led2R 6
+#define led2G 5
+#define led2B 3
+
+#define buzzerAlto 8
+#define buzzerBaixo 7
+
+int qualBuzzer = 0;
+int cntLigF = 0;
+int cntLigP = 0;
+char valApp = 0;
+
+//Função para Ligar o led rgb 1
+void led1RGB(int R, int G, int B) {
+  analogWrite(ledR1, R);
+  analogWrite(ledG1, G);
+  analogWrite(ledB1, B);
+}
+
+//Função para Ligar o led rgb 2
+void led2RGB(int R, int G, int B) {
+  analogWrite(ledR2, R);
+  analogWrite(ledG2, G);
+  analogWrite(ledB2, B);
+}
+
+//Função para apitar o buzzer passivo
+void buzzerPass(int buzzer) {
+  tone(buzzer, 500, 250);
+  delay(1000);
+}
+
+void setup() {
+  pinMode(led1R, OUTPUT);
+  pinMode(led1G, OUTPUT);
+  pinMode(led1B, OUTPUT);
+
+  pinMode(led2R, OUTPUT);
+  pinMode(led2G, OUTPUT);
+  pinMode(led2B, OUTPUT);
+  
+  pinMode(buzzerAlto, OUTPUT);
+  pinMode(buzzerBaixo, OUTPUT);
+
+  Serial.begin(9600);
+}
+
+
+void loop() {
+  analogWrite(led1R, 255);
+  analogWrite(led1G, 255);
+  analogWrite(led1B, 255);
+
+  
+  analogWrite(led2R, 255);
+  analogWrite(led2G, 255);
+  analogWrite(led2B, 255);
+
+  tone(buzzerBaixo, 200, 200);
+
+  delay(1000);
+}
