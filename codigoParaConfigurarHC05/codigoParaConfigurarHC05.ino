@@ -8,7 +8,7 @@ void setup() {
   bt.begin(38400);
 
   pinMode(2, INPUT);
-  pinMode(3, OUTPUT);
+  pinMode(4, OUTPUT);
 }
 
 void loop() {
