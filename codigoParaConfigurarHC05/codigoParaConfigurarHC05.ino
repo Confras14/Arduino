@@ -1,6 +1,6 @@
 #include <SoftwareSerial.h>
 
-SoftwareSerial bt(2, 4);
+SoftwareSerial bt(2, 3);
 
 void setup() {
   Serial.begin(38400);
@@ -8,7 +8,7 @@ void setup() {
   bt.begin(38400);
 
   pinMode(2, INPUT);
-  pinMode(4, OUTPUT);
+  pinMode(3, OUTPUT);
 }
 
 void loop() {
