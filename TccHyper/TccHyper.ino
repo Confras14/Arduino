@@ -10,30 +10,30 @@
 #define ledB2 3
 
 int qualBuzzer = 0;
-int cntLigF = 0;
-int cntLigP = 0;
+// int cntLigF = 0;
+// int cntLigP = 0;
 char valApp = 0;
 
 //Função para Ligar o led rgb 1
-void ledRGB(int R, int G, int B) {
+void ledRGB1(int R, int G, int B) {
   analogWrite(ledR1, R);
   analogWrite(ledG1, G);
   analogWrite(ledB1, B);
 }
 
 //Função para Ligar o led rgb 2
-void ledRGB(int R, int G, int B) {
+void ledRGB2(int R, int G, int B) {
   analogWrite(ledR2, R);
   analogWrite(ledG2, G);
   analogWrite(ledB2, B);
 }
 
-//Função para apitar o buzzer passivo
+//Função para apitar o buzzer
 void buzzerPass(int buzzer) {
   tone(buzzer, 500, 250);
-  delay(750);
+  delay(1000);
 }
-ww
+
 void setup() {
   pinMode(buzzerPassB, OUTPUT);
   pinMode(buzzerPassA, OUTPUT);
@@ -66,39 +66,55 @@ void loop() {
     Serial.println(valApp);
   }
 
-  if(valApp == 'A'){qualBuzzer = 1;
-    Serial.println(qualBuzzer);}
-  if(valApp == 'a'){qualBuzzer = 2;
-    Serial.println(qualBuzzer);}
+  //Escolhendo o buzzer
+  if(valApp == 'A') {
+    qualBuzzer = 1;
+    Serial.print("Buzzer alto: ");
+    Serial.println(qualBuzzer);
+  }
 
-  if(valApp == 'O' || cntLigF == 1) {
+  if(valApp == 'a') {
+    qualBuzzer = 2;
+    Serial.print("Buzzer baixo: ");
+    Serial.println(qualBuzzer);
+  }
+  //Fim escolhendo o buzzer
+
+  //Modo foco iniciado
+  // if(valApp == 'O' || cntLigF == 1) {
     if(qualBuzzer == 0 || qualBuzzer != 1 || qualBuzzer != 2) {
       Serial.println("Escolha um buzzer antes!");
     }
-    else if(qualBuzzer == 1){
-      //Ligar buzzer baixo
+    else if(qualBuzzer == 1) {
+      //Ligar buzzer alto
       int lbb = 0;
       while(lbb != 1){
-        buzzerPass(buzzerPassB);
+        buzzerPass(buzzerPassA);
         
         valApp = Serial.read();
         Serial.println(valApp);
 
         if(valApp == 'a'){
           qualBuzzer = 2;
+          Serial.print("Buzzer baixo: ");
           Serial.println(qualBuzzer);
         }
 
-        if(digitalRead(buzzerPassA) == 1) {tone(buzzerPassA, 1, 1);}
-        if(valApp == 'o') {lbb = 1;}
+        if(digitalRead(buzzerPassA) == 1) {
+          tone(buzzerPassA, 0, 1);
+        }
+        
+        if(valApp == 'o') {
+          lbb = 1;
+        }
         
         if(qualBuzzer == 1) {
-          cntLigF = 1;
+          // cntLigF = 1;
           lbb = 1;
         }
       }
     }
-    else if(qualBuzzer == 2 || cntLigF == 1){
+    // else if(qualBuzzer == 2 || cntLigF == 1){
       //Ligar buzzer alto
       int lba = 0;
       while(lba != 1){
@@ -120,18 +136,18 @@ void loop() {
           lba = 1;
         }
       }
-    }
+    // }
   }
 
-  else if(cntLigF != 1 && valApp == 'P'){
+  // else if(cntLigF != 1 && valApp == 'P'){
     //Pomodoro
-  }
-  else if(cntLigF != 1 && valApp == 'C'){
+  // }
+  // else if(cntLigF != 1 && valApp == 'C'){
     //Pausa Curta
-  }
-  else if(cntLigF != 1 && valApp == 'L'){
+  // }
+  // else if(cntLigF != 1 && valApp == 'L'){
     //Pausa Longa
-  }
+  // }
   
   delay(100);
 }
