@@ -19,6 +19,7 @@ char valApp = 0;
 
 //Varaiaveis para ajudar no funcionamento
 int cntLig = true;
+int OnFoco = false;
 
 //Função para Ligar o led rgb 1
 void ledRGB1(int R, int G, int B) {
@@ -36,8 +37,8 @@ void ledRGB2(int R, int G, int B) {
 
 //Função para apitar o buzzer
 void buzzerApito(int buzzer) {
-  tone(buzzer, 500, 250);
-  delay(1000);
+  tone(buzzer, 500, 150);
+  delay(600);
 }
 
 void setup() {
@@ -63,11 +64,55 @@ void loop() {
     valApp = Serial.read();
     Serial.println(valApp);
   }
+  
   cntLig = true;
+  //Qual Buzzer
 
-  tone(buzzerA, 500, 500);
+  if(valApp == 'A') {
+    qualBuzzer = 'A';
+    Serial.println("Buzer Alto");
+  } else if(valApp == 'a') {
+    qualBuzzer = 'a';
+    Serial.println("Buzer Baixo");
+  }
+  
+  //Fim Qual Buzzer
+  //------------------------------------------------------------------------------------------------------------------
+  //Modo Foco
 
+  if(valApp == 'O') {
+    OnFoco = true;
+    if(qualBuzzer = 'A') {
+      while(OnFoco) {
+        buzzerApito(buzzerA);
+
+        valApp = Serial.read();
+        Serial.println(valApp);
+        if(valApp == 'o') {
+          OnFoco = false;
+        }
+      }
+    }
+    
+    else if(qualBuzzer = 'a') {
+      while(OnFoco) {
+        buzzerApito(buzzerB);
+
+        valApp = Serial.read();
+        Serial.println(valApp);
+        if(valApp == 'o') {
+          OnFoco = false;
+        }
+      }
+    }
+  }
+  
+  //Fim Modo Foco
+  //------------------------------------------------------------------------------------------------------------------
   //Modo Pomodoro
+
+
+  
   //Fim Modo Pomodoro
   delay(500);
 }
