@@ -25,7 +25,7 @@
   int modoPomo = false;
 //----------------------------------------------------
 
-//Função para Ligar os leds rgb
+//Funcao para Ligar os leds rgb
   void ledRGB(int led, int R, int G, int B) {
     if(led == 1){
       analogWrite(ledR1, R);
@@ -39,7 +39,7 @@
   }
 //----------------------------------------------------
 
-//Função para apitar o buzzer
+//Funcao para apitar o buzzer
   void buzzerApito(int buzzer) {
     tone(buzzer, 500, 250);
     delay(1000);
