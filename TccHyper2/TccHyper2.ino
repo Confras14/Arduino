@@ -19,11 +19,16 @@
 //----------------------------------------------------
 
 //Varaiaveis para ajudar no funcionamento
+<<<<<<< HEAD
   int qualBuzzer = true;
   int statusBlue = false;
   int modoFoco = false;
   int modoPomo = false;
 //----------------------------------------------------
+=======
+int cntLig = true;
+int OnFoco = false;
+>>>>>>> 0db0808f1ecbafe00e8979e3a3bc06ad5a064704
 
 //Função para Ligar os leds rgb
   void ledRGB(int led, int R, int G, int B) {
@@ -40,11 +45,18 @@
 //----------------------------------------------------
 
 //Função para apitar o buzzer
+<<<<<<< HEAD
   void buzzerApito(int buzzer) {
     tone(buzzer, 500, 250);
     delay(1000);
   }
 //----------------------------------------------------
+=======
+void buzzerApito(int buzzer) {
+  tone(buzzer, 500, 150);
+  delay(600);
+}
+>>>>>>> 0db0808f1ecbafe00e8979e3a3bc06ad5a064704
 
 //Declaradno as portas usadas como saida/entrada e Iniciando o monitor serial
   void setup() {
@@ -85,6 +97,7 @@ void loop() {
   */
 
   //Receber e imprimir o valor vindo do bluetooth
+<<<<<<< HEAD
     if(cntLig) {
       valApp = Serial.read();
       Serial.println(valApp);
@@ -204,6 +217,61 @@ void loop() {
         }
       }
     }
+=======
+  if(cntLig) {
+    valApp = Serial.read();
+    Serial.println(valApp);
+  }
+  
+  cntLig = true;
+  //Qual Buzzer
+
+  if(valApp == 'A') {
+    qualBuzzer = 'A';
+    Serial.println("Buzer Alto");
+  } else if(valApp == 'a') {
+    qualBuzzer = 'a';
+    Serial.println("Buzer Baixo");
+  }
+  
+  //Fim Qual Buzzer
+  //------------------------------------------------------------------------------------------------------------------
+  //Modo Foco
+
+  if(valApp == 'O') {
+    OnFoco = true;
+    if(qualBuzzer = 'A') {
+      while(OnFoco) {
+        buzzerApito(buzzerA);
+
+        valApp = Serial.read();
+        Serial.println(valApp);
+        if(valApp == 'o') {
+          OnFoco = false;
+        }
+      }
+    }
+    
+    else if(qualBuzzer = 'a') {
+      while(OnFoco) {
+        buzzerApito(buzzerB);
+
+        valApp = Serial.read();
+        Serial.println(valApp);
+        if(valApp == 'o') {
+          OnFoco = false;
+        }
+      }
+    }
+  }
+  
+  //Fim Modo Foco
+  //------------------------------------------------------------------------------------------------------------------
+  //Modo Pomodoro
+
+
+  
+>>>>>>> 0db0808f1ecbafe00e8979e3a3bc06ad5a064704
   //Fim Modo Pomodoro
 
   delay(500);
