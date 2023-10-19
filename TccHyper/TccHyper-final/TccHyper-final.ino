@@ -15,17 +15,16 @@
 //----------------------------------------------------
 
 //Variavel para receber infos do bluetooth
-  char valApp = 0;
+  char valApp;
 //----------------------------------------------------
 
 //Varaiaveis para ajudar no funcionamento
   int qualBuzzer = true;
-  int statusBlue = false;
   int modoFoco = false;
   int modoPomo = false;
 //----------------------------------------------------
 
-//Função para Ligar os leds rgb
+//Funcao para Ligar os leds rgb
   void ledRGB(int led, int R, int G, int B) {
     if(led == 1){
       analogWrite(ledR1, R);
@@ -39,7 +38,7 @@
   }
 //----------------------------------------------------
 
-//Função para apitar o buzzer
+//Funcao para apitar o buzzer
   void buzzerApito(int buzzer) {
     tone(buzzer, 500, 250);
     delay(1000);
@@ -67,9 +66,6 @@
 
 void loop() {
   /*Valores recebidos
-    - Bluetooth
-    'B' = Conectado
-    'b' = Desconectado
 
     - Qual buzzer
     'A' = Buzzer alto
@@ -84,11 +80,13 @@ void loop() {
     't' = Desligar modo Pomo
   */
 
+  //Lingando o led de status
+    ledRGB(1, 20, 150, 50);
+  //--------------------------------------------------
+
   //Receber e imprimir o valor vindo do bluetooth
-    if(cntLig) {
-      valApp = Serial.read();
-      Serial.println(valApp);
-    }
+    valApp = Serial.read();
+    Serial.println(valApp);
   //--------------------------------------------------
 
   //If's com as infos do bluetooth
@@ -100,15 +98,6 @@ void loop() {
         qualBuzzer = false;
         Serial.println("Buzer Baixo");
       } 
-    //------------------------------------------------
-    //Luz bluetooth
-      else if (valApp == 'B') {
-        statusBlue = true;
-        Serial.println("Bluetooth conectado");
-      } else if (valApp == 'b') {
-        statusBlue = false;
-        Serial.println("Bluetooth desconectado");
-      }
     //------------------------------------------------
     //Modo Foco
       else if (valApp == 'O') {
@@ -128,15 +117,6 @@ void loop() {
         Serial.println("Modo Pomo desligado");
       }   
   //--------------------------------------------------
-
-
-  //Luz bluetooth
-    if(statusBlue) {
-      ledRGB(2, 200, 25, 25);
-    } else {
-      ledRGB(2, 25, 200, 25);
-    }
-  //Fim Luz bluetooth
   
   //Modo Foco
     if (modoFoco) {
@@ -157,7 +137,7 @@ void loop() {
       } else {
         Serial.println("Modo Foco ligado com buzzer baixo");
         for(int x = true; x; x) {
-          buzzerApito(buzzerA);
+          buzzerApito(buzzerB);
 
           valApp = Serial.read();
           Serial.println(valApp);
@@ -182,7 +162,7 @@ void loop() {
           valApp = Serial.read();
           Serial.println(valApp);
 
-          if (valApp == 'o') {
+          if (valApp == 't') {
             modoPomo = false;
             v = false;
             Serial.println("Modo Pomo desligado");
@@ -196,7 +176,7 @@ void loop() {
           valApp = Serial.read();
           Serial.println(valApp);
 
-          if (valApp == 'o') {
+          if (valApp == 't') {
             modoPomo = false;
             z = false;
             Serial.println("Modo Pomo desligado");
